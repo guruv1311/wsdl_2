@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://tempuri.org/Emp_set" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mrm="http://tempuri.org/Emp_set" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://tempuri.org/Emp_set" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://tempuri.org/Emp_set">
+        
+  <xsd:element name="ManID" type="xsd:int"/>
+        
+  <xsd:element name="MagName" type="xsd:string"/>
+        
+  <xsd:element name="Contact" type="xsd:string"/>
+        
+  <xsd:element name="Address" type="xsd:string"/>
+        
+  <xsd:element name="Faultcode" type="xsd:string"/>
+        
+  <xsd:element name="FaultString" type="xsd:string"/>
+        
+  <xsd:complexType name="GetmagRequest">
+            
+    <xsd:sequence>
+                
+      <xsd:element ref="mrm:ManID"/>
+              
+    </xsd:sequence>
+          
+  </xsd:complexType>
+        
+  <xsd:complexType name="GetMagResponse">
+            
+    <xsd:sequence>
+                
+      <xsd:element ref="mrm:Contact"/>
+                
+      <xsd:element ref="mrm:MagName"/>
+                
+      <xsd:element ref="mrm:Address"/>
+              
+    </xsd:sequence>
+          
+  </xsd:complexType>
+        
+  <xsd:complexType name="Fault">
+            
+    <xsd:sequence>
+                
+      <xsd:element ref="mrm:Faultcode"/>
+                
+      <xsd:element ref="mrm:FaultString"/>
+              
+    </xsd:sequence>
+          
+  </xsd:complexType>
+        
+  <xsd:element ibmSchExtn:docRoot="true" name="GetmagRequest" type="mrm:GetmagRequest"/>
+        
+  <xsd:element ibmSchExtn:docRoot="true" name="GetMagResponse" type="mrm:GetMagResponse"/>
+        
+  <xsd:element ibmSchExtn:docRoot="true" name="Fault" type="mrm:Fault"/>
+        
+  <xsd:complexType name="GetEmpRequest">
+            
+    <xsd:sequence>
+                
+      <xsd:element ref="mrm:EmpID"/>
+              
+    </xsd:sequence>
+          
+  </xsd:complexType>
+        
+  <xsd:complexType name="GetEmpResponse">
+            
+    <xsd:sequence>
+                
+      <xsd:element ref="mrm:Name"/>
+                
+      <xsd:element ref="mrm:eContact"/>
+                
+      <xsd:element ref="mrm:eAddress"/>
+              
+    </xsd:sequence>
+          
+  </xsd:complexType>
+        
+  <xsd:element name="EmpID" type="xsd:int"/>
+        
+  <xsd:element name="Name" type="xsd:string"/>
+        
+  <xsd:element name="eAddress" type="xsd:string"/>
+        
+  <xsd:element name="eContact" type="xsd:string"/>
+        
+  <xsd:element ibmSchExtn:docRoot="true" name="GetEmpResponse" type="mrm:GetEmpResponse"/>
+        
+  <xsd:element ibmSchExtn:docRoot="true" name="GetEmpRequest" type="mrm:GetEmpRequest"/>
+      
+</xsd:schema>
