@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns="http://tempuri.org/Emp_set" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://tempuri.org/Emp_set" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Emp_set" targetNamespace="http://tempuri.org/Emp_set">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="Emp_setService_InlineSchema1.xsd"/>
+        <binding hasEncoding="false" imported="true" name="Emp_setSOAP_HTTP_Binding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+    
+  <wsdl:types>
+        
+          
+    <xsd:schema xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mrm="http://tempuri.org/Emp_set" targetNamespace="http://tempuri.org/Emp_set">
+      
+      <xsd:include schemaLocation="Emp_setService_InlineSchema1.xsd"/>
+    </xsd:schema>
+        
+  </wsdl:types>
+    
+  <wsdl:message name="GetManagerDetails_in">
+        
+    <wsdl:part element="GetmagRequest" name="GetmagRequest"/>
+      
+  </wsdl:message>
+    
+  <wsdl:message name="GetManagerDetails_out">
+        
+    <wsdl:part element="GetMagResponse" name="GetMagResponse"/>
+      
+  </wsdl:message>
+    
+  <wsdl:message name="GetManagerDetails_fault1">
+        
+    <wsdl:part element="Fault" name="Fault"/>
+      
+  </wsdl:message>
+    
+  <wsdl:message name="GetEmpDetails_in">
+        
+    <wsdl:part element="GetEmpRequest" name="GetEmpRequest"/>
+      
+  </wsdl:message>
+    
+  <wsdl:message name="GetEmpDetails_out">
+        
+    <wsdl:part element="GetEmpResponse" name="GetEmpResponse"/>
+      
+  </wsdl:message>
+    
+  <wsdl:message name="GetEmpDetails_fault1">
+        
+    <wsdl:part element="Fault" name="Fault"/>
+      
+  </wsdl:message>
+    
+  <wsdl:portType name="Emp_setPortType">
+        
+    <wsdl:operation name="GetManagerDetails">
+            
+      <wsdl:input message="GetManagerDetails_in" name="GetManagerDetails_Input"/>
+            
+      <wsdl:output message="GetManagerDetails_out" name="GetManagerDetails_Output"/>
+            
+      <wsdl:fault message="GetManagerDetails_fault1" name="GetManagerDetails_Fault"/>
+          
+    </wsdl:operation>
+        
+    <wsdl:operation name="GetEmpDetails">
+            
+      <wsdl:input message="GetEmpDetails_in" name="GetEmpDetails_Input"/>
+            
+      <wsdl:output message="GetEmpDetails_out" name="GetEmpDetails_Output"/>
+            
+      <wsdl:fault message="GetEmpDetails_fault1" name="GetEmpDetails_Fault"/>
+          
+    </wsdl:operation>
+      
+  </wsdl:portType>
+    
+  <wsdl:binding name="Emp_setSOAP_HTTP_Binding" type="Emp_setPortType">
+        
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        
+    <wsdl:operation name="GetManagerDetails">
+            
+      <soap:operation soapAction=""/>
+            
+      <wsdl:input name="GetManagerDetails_Input">
+                
+        <soap:body parts="GetmagRequest" use="literal"/>
+              
+      </wsdl:input>
+            
+      <wsdl:output name="GetManagerDetails_Output">
+                
+        <soap:body parts="GetMagResponse" use="literal"/>
+              
+      </wsdl:output>
+            
+      <wsdl:fault name="GetManagerDetails_Fault">
+                
+        <soap:fault name="GetManagerDetails_Fault" use="literal"/>
+              
+      </wsdl:fault>
+          
+    </wsdl:operation>
+        
+    <wsdl:operation name="GetEmpDetails">
+            
+      <soap:operation soapAction=""/>
+            
+      <wsdl:input name="GetEmpDetails_Input">
+                
+        <soap:body parts="GetEmpRequest" use="literal"/>
+              
+      </wsdl:input>
+            
+      <wsdl:output name="GetEmpDetails_Output">
+                
+        <soap:body parts="GetEmpResponse" use="literal"/>
+              
+      </wsdl:output>
+            
+      <wsdl:fault name="GetEmpDetails_Fault">
+                
+        <soap:fault name="GetEmpDetails_Fault" use="literal"/>
+              
+      </wsdl:fault>
+          
+    </wsdl:operation>
+      
+  </wsdl:binding>
+    
+  <wsdl:service name="getDetails">
+        
+    <wsdl:port binding="Emp_setSOAP_HTTP_Binding" name="getDetails">
+            
+      <soap:address location="http://localhost:7800/getDetails"/>
+          
+    </wsdl:port>
+      
+  </wsdl:service>
+  
+</wsdl:definitions>
