@@ -1,65 +1,44 @@
 BROKER SCHEMA com.nkp.training
-
 DECLARE soapNS NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 DECLARE empNS NAMESPACE 'http://tempuri.org/Emp_set';
-
 CREATE COMPUTE MODULE Details_Compute
   CREATE FUNCTION Main() RETURNS BOOLEAN
   BEGIN
     DECLARE empId CHARACTER;
     DECLARE manId CHARACTER;
-    
     -- Declare references to possible request messages
     DECLARE empReqRef REFERENCE TO InputRoot.SOAP.Body.empNS:GetEmpRequest;
     DECLARE magReqRef REFERENCE TO InputRoot.SOAP.Body.empNS:GetmagRequest;
-    
     -- Handle GetEmpRequest
     IF LASTMOVE(empReqRef) THEN
-      SET empId = TRIM(CAST(empReqRef.empNS:EmpID AS CHARACTER));
-      
-      IF empId IS NOT NULL AND empId <> '' THEN
+      SET empId = empReqRef.empNS:EmpID;
+      IF empId = 1 THEN
         CREATE FIELD OutputRoot.SOAP.Body.empNS:GetEmpResponse;
         DECLARE outEmpRespRef REFERENCE TO OutputRoot.SOAP.Body.empNS:GetEmpResponse;
-        
-        -- Populate with dummy details dynamically
-        SET outEmpRespRef.empNS:Fname   = 'FirstName_' || empId;
-        SET outEmpRespRef.empNS:Lname   = 'LastName_' || empId;
-        SET outEmpRespRef.empNS:Email   = 'user' || empId || '@example.com';
-        SET outEmpRespRef.empNS:Contact = '123-000-' || empId;
-        SET outEmpRespRef.empNS:Title   = 'Employee Title';
+        SET outEmpRespRef.empNS:Fname   = 'John';
+        SET outEmpRespRef.empNS:Lname   = 'Doe';
+        SET outEmpRespRef.empNS:Email   = 'john.doe@example.com';
+        SET outEmpRespRef.empNS:Contact = '123-456-7890';
+        SET outEmpRespRef.empNS:Title   = 'Software Engineer';
         SET outEmpRespRef.empNS:Salary  = '80000';
-        
-      ELSE
-        CREATE FIELD OutputRoot.SOAP.Body.soapNS:Fault;
-        DECLARE FaultRef REFERENCE TO OutputRoot.SOAP.Body.soapNS:Fault;
-        
-        SET FaultRef.faultcode   = 'SOAP001';
-        SET FaultRef.faultstring = 'Invalid or Missing EmpID';
       END IF;
-      
     -- Handle GetmagRequest
     ELSEIF LASTMOVE(magReqRef) THEN
-      SET manId = TRIM(CAST(magReqRef.empNS:ManID AS CHARACTER));
-      
-      IF manId IS NOT NULL AND manId <> '' THEN
+      SET manId = magReqRef.empNS:ManID;
+      IF manId = 2 THEN
         CREATE FIELD OutputRoot.SOAP.Body.empNS:GetMagResponse;
         DECLARE outManRespRef REFERENCE TO OutputRoot.SOAP.Body.empNS:GetMagResponse;
-        
-        -- Populate with dummy manager details dynamically
-        SET outManRespRef.empNS:Contact = '555-000-' || manId;
-        SET outManRespRef.empNS:MagName = 'Manager_' || manId;
-        SET outManRespRef.empNS:Address = 'Address for manager ' || manId;
-        
-      ELSE
-        CREATE FIELD OutputRoot.SOAP.Body.soapNS:Fault;
-        DECLARE FaultRef REFERENCE TO OutputRoot.SOAP.Body.soapNS:Fault;
-        
-        SET FaultRef.faultcode   = 'SOAP002';
-        SET FaultRef.faultstring = 'Invalid or Missing ManID';
+        SET outManRespRef.empNS:Contact  = '555-222-3333';
+        SET outManRespRef.empNS:MagName  = 'Michael Supervisor';
+        SET outManRespRef.empNS:Address  = '789 Supervisor Avenue';
       END IF;
-      
     END IF;
-    
     RETURN TRUE;
   END;
 END MODULE;
+
+
+
+
+
+
